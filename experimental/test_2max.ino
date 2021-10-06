@@ -1,6 +1,7 @@
 // CLK MAY BE COMMON FOR DIFFEREN MAX CHIPS
 // LOAD AND DataIn SHOULD BE GIVEN TO EACH CHIP
 // ----------------------------------------------
+// CLK AND LOAD AND DataIn ARE COMMON IF CHIPS IN SERIAL
 
 // https://www.ardumotive.com/8-digit-7seg-display-en.html
 #include "LedControl.h"

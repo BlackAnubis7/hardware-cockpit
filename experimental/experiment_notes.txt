@@ -1,0 +1,1 @@
+- If the Serial gets closed by Python before Arduino reads buffer, buffer is cleared and data is lost
