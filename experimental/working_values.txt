@@ -1,0 +1,13 @@
+GEAR_RIGHT_POSITION - values 0-1, where 0=up, 1=down
+GEAR_LEFT_POSITION - as above
+GEAR_CENTER_POSITION - as above
+
+TURB_ENG_N1:[index] - with index of the engine (from 1, which is the leftmost engine)
+TURB_ENG_N2:[index] - (values sometimes differ from indicated)
+
+SPOILERS_HANDLE_POSITION - values 0-1, 0=retracted, 1=extended
+SPOILERS_LEFT_POSITION - as above
+
+TRAILING_EDGE_FLAPS_RIGHT_ANGLE - right flaps angle in radians
+LEADING_EDGE_FLAPS_RIGHT_ANGLE - right slats angle in radians
+

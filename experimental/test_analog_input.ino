@@ -18,10 +18,9 @@ char chr(int n) {
 
 void loop() { 
   analogInput = analogRead(analogPin);
-  lc.setChar(0, 2, chr(analogInput % 10), false);
-  analogInput /= 10;
-  lc.setChar(0, 1, chr(analogInput % 10), false);
-  analogInput /= 10;
-  lc.setChar(0, 0, chr(analogInput % 10), false);
+  lc.setChar(0, 0, '-', false);
+  lc.setChar(0, 1, '-', false);
+  lc.setChar(0, 2, '-', false);
+  lc.setIntensity(0,analogInput/70);
   delay(20);
 }

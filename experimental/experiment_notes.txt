@@ -1,1 +1,6 @@
 - If the Serial gets closed by Python before Arduino reads buffer, buffer is cleared and data is lost
+- Shortest achieved button pressing time was 0.027s. Normal presses varied between 0.08s and 0.13s
+- DM13A is putting received bit to D0 output of the first connected chip, and moves all previous ones one notch up, from D0 to D1, and from D15 to D0 of the next chip in series
+- In DM13A handling, the clocked signals may be done in any speed, but LAT signal worked better when was on for at least 1ms
+- Input MUX (demultiplexer) works in any speed
+- Output MUX does not work as planned for now
