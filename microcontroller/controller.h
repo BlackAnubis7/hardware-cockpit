@@ -44,6 +44,7 @@ void dm13a_setbit(dm13a* chain, int diode_ind, int newbit) {
     @param chain pointer to DM13A struct
 */
 void dm13a_flush(dm13a* chain) {
+    _OUT_LOW(chain->lat);
     for(int c = chain->size-1; c>=0; c--) {
         for(int i=0; i<=32; i++) {  // 32 will create the last clock edge
             if(i%2 == 0) {
@@ -57,7 +58,6 @@ void dm13a_flush(dm13a* chain) {
     _OUT_LOW(chain->dck);
     _OUT_HIGH(chain->lat);
     _SLEEP_MS(1);  // without that delay, correct work is not guaranteed
-    _OUT_LOW(chain->lat);
 }
 
 /*
@@ -80,9 +80,11 @@ void dm13a_init(dm13a* crt, _pin_t dai, _pin_t dck, _pin_t lat, _pin_t en, int s
     crt->lat = lat;
     _OUT_INIT(lat);
     _OUT_LOW(lat);
-    crt->en = en;
-    _OUT_INIT(en);
-    _OUT_LOW(en);
+    if(en != NULL) {
+        crt->en = en;
+        _OUT_INIT(en);
+        _OUT_LOW(en); 
+    }
     crt->size = size;
     crt->buffer = buffer;
     for(int i=0; i<size; i++) buffer[i] = 0;
