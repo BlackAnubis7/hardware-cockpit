@@ -1,6 +1,6 @@
 // TEST FILE
 
-#include "controller.h"
+#include "dm13a.h"
 
 dm13a ch;
 dm13a ch2;
@@ -8,8 +8,8 @@ _b16_t data[2];
 _b16_t data2[1];
 
 void setup() {
-    dm13a_init(&ch, 44, 46, 42, NULL, 1, data);
-    dm13a_init(&ch2, 44, 46, 30, NULL, 1, data2);
+    dm13a_init(&ch, 44, 46, 42, 1, data);
+    dm13a_init(&ch2, 44, 46, 30, 1, data2);
     delay(1000);
 }
 

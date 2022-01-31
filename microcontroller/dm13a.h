@@ -4,7 +4,6 @@ typedef struct dm13a {
     _pin_t dai;  // DataIn pin
     _pin_t dck;  // DataClock pin
     _pin_t lat;  // Latch pin
-    _pin_t en;  // Enable pin
     int size;  // Number of DM13A chips in chain
     _b16_t* buffer;  // array of length equal to size (MSB of buffer[0] will end up on first LED of first DM13A)
 } dm13a;
@@ -66,11 +65,10 @@ void dm13a_flush(dm13a* chain) {
     @param dai DataIn identifier of macrodefined type _pin_t
     @param dck DataClock identifier of macrodefined type _pin_t
     @param lat Latch identifier of macrodefined type _pin_t
-    @param en Enable identifier of macrodefined type _pin_t
     @param size number of DM13A chips in the chain
     @param buffer array of _b16_t elements; array's length has to be at least "size" (elements with indices equal or greater than "size" will remain unused)
 */
-void dm13a_init(dm13a* crt, _pin_t dai, _pin_t dck, _pin_t lat, _pin_t en, int size, _b16_t* buffer) {
+void dm13a_init(dm13a* crt, _pin_t dai, _pin_t dck, _pin_t lat, int size, _b16_t* buffer) {
     crt->dai = dai;
     _OUT_INIT(dai);
     _OUT_LOW(dai);
@@ -80,11 +78,6 @@ void dm13a_init(dm13a* crt, _pin_t dai, _pin_t dck, _pin_t lat, _pin_t en, int s
     crt->lat = lat;
     _OUT_INIT(lat);
     _OUT_LOW(lat);
-    if(en != NULL) {
-        crt->en = en;
-        _OUT_INIT(en);
-        _OUT_LOW(en); 
-    }
     crt->size = size;
     crt->buffer = buffer;
     for(int i=0; i<size; i++) buffer[i] = 0;
