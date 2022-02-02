@@ -1,4 +1,7 @@
+#include <stdint.h>
 #include "arduino_defs.h"
+
+typedef uint16_t _b16_t;
 
 typedef struct dm13a {
     _pin_t dai;  // DataIn pin
