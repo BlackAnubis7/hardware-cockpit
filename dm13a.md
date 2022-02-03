@@ -16,16 +16,16 @@ Connecting a single chip needs three digital output pins to work.
 ### Initialisation of the chip:
 ```c
 dm13a chip;
-_b16_t data;
+b16_t data;
 
 dm13a_init(&chip, 10, 9, 8, 1, &data);  // 1, because we have just one chip
 ```
 
 ### Managing LED states
 ```c
-dm13a_setbits(&chip, 0, (_b16_t)0b0000000000000000);  // will turn all off
+dm13a_setbits(&chip, 0, (b16_t)0b0000000000000000);  // will turn all off
 dm13a_setbit(&chip, 2, 1);  // will turn orange LED (OUT2) on
-dm13a_setbits(&chip, 0, (_b16_t)0b0000000000010000);  // will turn all except green (OUT11) off
+dm13a_setbits(&chip, 0, (b16_t)0b0000000000010000);  // will turn all except green (OUT11) off
 dm13a_setbit(&chip, 2, 1);  // will turn orange LED (OUT2) on again
 
 dm13a_flush(&chip);  // will display the changes made (both LEDs will light up)
@@ -47,17 +47,17 @@ Connecting multiple chips in chain needs three digital output pins to work, same
 Chain of DM13As is mostly treated like one, longer chip.
 ```c
 dm13a chip;
-_b16_t data[2];  // now we need a longer buffer
+b16_t data[2];  // now we need a longer buffer
 
 dm13a_init(&chip, 10, 9, 8, 2, data);  // 2, because now we have two chips in the chain
 ```
 
 ### Managing LED states
 ```c
-dm13a_setbits(&chip, 0, (_b16_t)0b0000000000000000);  // will turn whole 1st chip off
+dm13a_setbits(&chip, 0, (b16_t)0b0000000000000000);  // will turn whole 1st chip off
 dm13a_setbit(&chip, 2, 1);  // will turn orange LED (OUT2) on
 dm13a_setbit(&chip, 11, 1);  // will turn green LED (OUT11) on
-dm13a_setbits(&chip, 1, (_b16_t)0b1111111111111111);  // will turn whole 2nd chip on
+dm13a_setbits(&chip, 1, (b16_t)0b1111111111111111);  // will turn whole 2nd chip on
 dm13a_setbit(&chip, 25, 0);  // will turn blue LED (OUT9 of 2nd chip) off
 
 dm13a_flush(&chip);  // will display the changes made (orange and green on)
@@ -76,7 +76,7 @@ Connecting N chips in parallel needs (N+2) digital output pins to work. Generall
 Each chip is treated just like it was an independent singular chip.
 ```c
 dm13a chip1, chip2;
-_b16_t data1, data2;
+b16_t data1, data2;
 
 dm13a_init(&chip1, 10, 9, 8, 1, &data1);
 dm13a_init(&chip2, 10, 9, 7, 1, &data2);
