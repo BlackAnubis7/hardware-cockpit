@@ -1,14 +1,13 @@
-#include <stdint.h>
+#include "misc_defs.h"
 #include "arduino_defs.h"
-
-typedef uint16_t _b16_t;
 
 typedef struct dm13a {
     _pin_t dai;  // DataIn pin
     _pin_t dck;  // DataClock pin
     _pin_t lat;  // Latch pin
-    int size;  // Number of DM13A chips in chain
-    _b16_t* buffer;  // array of length equal to size (MSB of buffer[0] will end up on first LED of first DM13A)
+    short size;  // Number of DM13A chips in chain
+    _b16_t* buffer;  // array of length equal to size 
+    // MSB of buffer[0] will end up on first LED of first DM13A (the one connected directly to the microcontroller)
 } dm13a;
 
 /*
@@ -46,6 +45,7 @@ void dm13a_setbit(dm13a* chain, int diode_ind, int newbit) {
     @param chain pointer to DM13A struct
 */
 void dm13a_flush(dm13a* chain) {
+    _OUT_LOW(chain->dck);
     _OUT_LOW(chain->lat);
     for(int c = chain->size-1; c>=0; c--) {
         for(int i=0; i<=32; i++) {  // 32 will create the last clock edge
@@ -59,7 +59,7 @@ void dm13a_flush(dm13a* chain) {
     }
     _OUT_LOW(chain->dck);
     _OUT_HIGH(chain->lat);
-    _SLEEP_MS(1);  // without that delay, correct work is not guaranteed
+    _SLEEP_MICROS(1);  // just in case - documentation states it should be at least 15ns (this is over 60x more)
 }
 
 /*
@@ -71,7 +71,7 @@ void dm13a_flush(dm13a* chain) {
     @param size number of DM13A chips in the chain
     @param buffer array of _b16_t elements; array's length has to be at least "size" (elements with indices equal or greater than "size" will remain unused)
 */
-void dm13a_init(dm13a* crt, _pin_t dai, _pin_t dck, _pin_t lat, int size, _b16_t* buffer) {
+void dm13a_init(dm13a* crt, _pin_t dai, _pin_t dck, _pin_t lat, short size, _b16_t* buffer) {
     crt->dai = dai;
     _OUT_INIT(dai);
     _OUT_LOW(dai);
