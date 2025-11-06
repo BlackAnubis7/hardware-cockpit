@@ -32,11 +32,11 @@ dm13a_flush(&chip);  // will display the changes made (both LEDs will light up)
 ```
 ***IMPORTANT:*** Changes are not displayed until `dm13a_flush` is executed
 
-## Chain connection
-Connecting multiple chips in chain needs three digital output pins to work, same as with single chip. Any number of DM13As can be connected in chain (although numbers over 4 haven't been tested yet).
+## Chain (serial) connection
+Connecting multiple chips in chain needs three digital output pins to work, same as with single chip. Any number of DM13As can be connected in chain.
 
 ### Basic hardware setup:
-![single chip setup](images/DM13A_serial_bb.png)
+![serial chip setup](images/DM13A_serial_bb.png)
 1. `GND`(1), `DCK`(3), `LAT`(4), `EN`(21) and `VDD`(24) are connected together, similarly to one chip situation
 1. `REXT`(23) connected to Ground through resistors **(each chip has to have its own resistor)**
 1. First chip's `DAI`(2) is connected to chosen digital output pin
@@ -67,7 +67,7 @@ dm13a_flush(&chip);  // will display the changes made (orange and green on)
 Connecting N chips in parallel needs (N+2) digital output pins to work. Generally speaking, using serial connection is recommended.
 
 ### Basic hardware setup:
-![single chip setup](images/DM13A_parallel_bb.png)
+![parallel chip setup](images/DM13A_parallel_bb.png)
 1. `GND`(1), `DAI`(2), `DCK`(3), `EN`(21) and `VDD`(24) are connected together, similarly to one chip situation
 1. Each chip has `LAT`(4) connected to own digital output pin
 1. `REXT`(23) connected to Ground through resistors **(each chip has to have its own resistor)**

@@ -1,0 +1,9 @@
+"More or less" data from a single test. Tests include operations on multiple pins, so that data is more reliable. MEGA2560 chip was used.
+
+- 5M digital writes to HIGH - 31.38s (~6.3µs per operation)
+- 5M digital writes to LOW - 30.75s (~6.2µs per operation)
+- 5M alternating digital writes - 31.63s (~6.4µs per operation)
+- 5M digital reads - 20.25s (~4.1µs per operation)
+- 50K analog reads - 5.6s (~112µs per operation)
+- 1K serial writes (baud 115200, 100B each) - 8.67s (~86.7µs per byte)
+- A single 256B serial read - 15-16ms (~62.5µs per byte) 
